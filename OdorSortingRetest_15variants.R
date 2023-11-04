@@ -1,3 +1,10 @@
+########## Libraries ##########
+
+library(parallel)
+library(pbmcapply)
+
+nProc <- detectCores() - 1
+
 ########## Helper functions ##########
 
 ManhattanDistSorting <- function(x, reverse = FALSE) {
