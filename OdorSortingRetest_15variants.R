@@ -1,8 +1,4 @@
-########## Libraries ########## 
-
-nProc <- detectCores() - 1
-
-########## Functions ##########
+########## Helper functions ##########
 
 ManhattanDistSorting <- function(x, reverse = FALSE) {
   correct_order <- 1:5
@@ -58,8 +54,10 @@ SimpleErrorCountFlat <- function(x, reverse = FALSE) {
   return(err)
 }
 
+########## Main function for score calculation ##########
+
 PerformSortingTest <- function(Data, ListOfScoreTypes = c("Add_EuclidCorrectOrder")) {
-  RandomSortingResults <- pbmcapply::pbmclapply(ListOfScoreTypes, function(ActualScoreType) {
+  SortingResults <- pbmcapply::pbmclapply(ListOfScoreTypes, function(ActualScoreType) {
     if (dim(Data)[2] == 10) {
       ## Define Maxmum for scalings
 
@@ -206,7 +204,7 @@ PerformSortingTest <- function(Data, ListOfScoreTypes = c("Add_EuclidCorrectOrde
     return(list(Score = Score))
   }, mc.cores = nProc)
 
-  names(RandomSortingResults) <- ListOfScoreTypes
+  names(SortingResults) <- ListOfScoreTypes
 
-  return(RandomSortingResults)
+  return(SortingResults)
 }
